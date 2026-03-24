@@ -1,8 +1,6 @@
 package com.patchly.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -49,5 +47,11 @@ public class IncidentKB {
     @Column(name = "status")
     private String status;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "solution_id")
+    private SolutionRegistry solution;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "root_cause_id")
+    private RootCause rootCauseId;
 }

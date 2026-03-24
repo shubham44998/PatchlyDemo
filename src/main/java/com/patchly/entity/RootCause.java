@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Table(name = "root_cause")
 @Data
 @NoArgsConstructor
-public class RootCauseKB {
+public class RootCause {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
