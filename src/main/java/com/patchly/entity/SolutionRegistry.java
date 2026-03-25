@@ -1,5 +1,6 @@
 package com.patchly.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -8,6 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "solution_registry")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Data
 public class SolutionRegistry {
 
