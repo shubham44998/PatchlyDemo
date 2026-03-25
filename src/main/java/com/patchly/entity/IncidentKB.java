@@ -32,9 +32,6 @@ public class IncidentKB {
     @Column(name = "error_snapshot", length = 2000)
     private String errorSnapshot;
 
-    @Column(name = "root_cause")
-    private String rootCause;
-
     @Column(name = "resolution", length = 2000)
     private String resolution;
 
@@ -53,5 +50,5 @@ public class IncidentKB {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "root_cause_id")
-    private RootCause rootCauseId;
+    private RootCause rootCause;
 }

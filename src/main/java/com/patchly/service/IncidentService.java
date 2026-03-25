@@ -38,15 +38,20 @@ public class IncidentService {
         // Save root cause
         RootCause rootCause = new RootCause();
         rootCause.setDescription(rootCauseText);
+        rootCause.setUpdatedBy("AGENT");
+        rootCause.setChangeReason("Auto RCA");
         rootCauseRepository.save(rootCause);
 
         // Save solution
         SolutionRegistry solution = new SolutionRegistry();
         solution.setFixSteps(solutionText);
+        solution.setRiskLevel("MEDIUM");
+        solution.setUpdatedBy("AGENT");
+        solution.setChangeReason("Auto Solution");
         solutionRepository.save(solution);
 
-        // Link to incident
-        incident.setRootCause(rootCauseText);
+        // 🔥 CORRECT LINKING
+        incident.setRootCause(rootCause);
         incident.setSolution(solution);
         incident.setStatus("SOLUTION_LINKED");
 
