@@ -30,19 +30,24 @@ public class IncidentService {
     }
 
     // Link solution + root cause (Agent will call this)
-    public IncidentKB linkSolution(String incidentId, Long solutionId, Long rootCauseId) {
+    public IncidentKB linkSolution(String incidentId, String rootCauseText, String solutionText) {
 
         IncidentKB incident = incidentRepository.findById(incidentId)
                 .orElseThrow(() -> new RuntimeException("Incident not found"));
 
-        SolutionRegistry solution = solutionRepository.findById(solutionId)
-                .orElseThrow(() -> new RuntimeException("Solution not found"));
+        // Save root cause
+        RootCause rootCause = new RootCause();
+        rootCause.setDescription(rootCauseText);
+        rootCauseRepository.save(rootCause);
 
-        RootCause rootCause = rootCauseRepository.findById(rootCauseId)
-                .orElseThrow(() -> new RuntimeException("Root cause not found"));
+        // Save solution
+        SolutionRegistry solution = new SolutionRegistry();
+        solution.setFixSteps(solutionText);
+        solutionRepository.save(solution);
 
+        // Link to incident
+        incident.setRootCause(rootCauseText);
         incident.setSolution(solution);
-        incident.setRootCause(String.valueOf(rootCause));
         incident.setStatus("SOLUTION_LINKED");
 
         return incidentRepository.save(incident);

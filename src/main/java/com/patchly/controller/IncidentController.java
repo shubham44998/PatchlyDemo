@@ -1,6 +1,7 @@
 package com.patchly.controller;
 
 import com.patchly.entity.IncidentKB;
+import com.patchly.entity.LinkSolutionRequest;
 import com.patchly.entity.SolutionRegistry;
 import com.patchly.service.IncidentService;
 import jakarta.validation.Valid;
@@ -37,11 +38,14 @@ public class IncidentController {
     @PostMapping("/{incidentId}/link")
     public ResponseEntity<?> linkSolution(
             @PathVariable String incidentId,
-            @RequestParam Long solutionId,
-            @RequestParam Long rootCauseId) {
+            @RequestBody LinkSolutionRequest request) {
 
         return ResponseEntity.ok(
-                incidentService.linkSolution(incidentId, solutionId, rootCauseId)
+                incidentService.linkSolution(
+                        incidentId,
+                        request.getRootCause(),
+                        request.getSolution()
+                )
         );
     }
 
