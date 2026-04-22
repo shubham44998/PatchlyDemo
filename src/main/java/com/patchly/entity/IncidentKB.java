@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Table(name = "incident_kb")
@@ -15,9 +16,11 @@ import java.time.LocalDateTime;
 public class IncidentKB {
 
 
+
     @Id
-    @Column(name = "incident_id")
-    private String incidentId;
+    @Column(name = "incident_id", columnDefinition = "uniqueidentifier")
+    private UUID incidentId;
+
 
     @Column(name = "incident_title")
     private String incidentTitle;
