@@ -14,13 +14,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class IncidentKB {
-
-
-
     @Id
-    @Column(name = "incident_id", columnDefinition = "uniqueidentifier")
-    private UUID incidentId;
-
+    @Column(name = "incident_id", length = 255)
+    private String incidentId;
 
     @Column(name = "incident_title")
     private String incidentTitle;
@@ -53,7 +49,7 @@ public class IncidentKB {
     @JoinColumn(name = "solution_id")
     private SolutionRegistry solution;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "root_cause_id")
     private RootCause rootCause;
 }
