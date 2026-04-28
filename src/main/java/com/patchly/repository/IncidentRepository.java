@@ -1,15 +1,15 @@
 package com.patchly.repository;
 
-import com.patchly.entity.IncidentKB;
+import com.patchly.entity.IncidentRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface IncidentRepository extends JpaRepository<IncidentKB, String> {
+public interface IncidentRepository extends JpaRepository<IncidentRequest, String> {
 
     //  Find by service (useful for matching)
-    List<IncidentKB> findByServiceEndpoint(String serviceEndpoint);
+    List<IncidentRequest> findByServiceEndpoint(String serviceEndpoint);
 
     //  Find by status
-    List<IncidentKB> findByStatus(String status);
+    List<IncidentRequest> findByStatus(String status);
 }

@@ -18,21 +18,21 @@ public class IncidentService {
     private final SolutionVerificationRepository verificationRepository;
 
     // Get all incidents
-    public List<IncidentKB> getAllIncidents() {
+    public List<IncidentRequest> getAllIncidents() {
         return incidentRepository.findAll();
     }
 
     // Create new incident
-    public IncidentKB createIncident(IncidentKB incident) {
+    public IncidentRequest createIncident(IncidentRequest incident) {
         incident.setIncidentDatetime(LocalDateTime.now());
         incident.setStatus("NEW");
         return incidentRepository.save(incident);
     }
 
     // Link solution + root cause (Agent will call this)
-    public IncidentKB linkSolution(String incidentId, String rootCauseText, String solutionText) {
+    public IncidentRequest linkSolution(String incidentId, String rootCauseText, String solutionText) {
 
-        IncidentKB incident = incidentRepository.findById(incidentId)
+        IncidentRequest incident = incidentRepository.findById(incidentId)
                 .orElseThrow(() -> new RuntimeException("Incident not found"));
 
         // Save root cause
@@ -61,7 +61,7 @@ public class IncidentService {
     // Get fix for incident
     public SolutionRegistry getFix(String incidentId) {
 
-        IncidentKB incident = incidentRepository.findById(incidentId)
+        IncidentRequest incident = incidentRepository.findById(incidentId)
                 .orElseThrow(() -> new RuntimeException("Incident not found"));
 
         return incident.getSolution();
@@ -77,7 +77,7 @@ public class IncidentService {
     // Apply fix (basic version)
     public String applyFix(String incidentId) {
 
-        IncidentKB incident = incidentRepository.findById(incidentId)
+        IncidentRequest incident = incidentRepository.findById(incidentId)
                 .orElseThrow(() -> new RuntimeException("Incident not found"));
 
         SolutionRegistry solution = incident.getSolution();

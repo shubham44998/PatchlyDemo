@@ -6,14 +6,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Entity
 @Table(name = "incident_kb")
 @Data
 @NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class IncidentKB {
+public class IncidentRequest {
     @Id
     @Column(name = "incident_id", length = 255)
     private String incidentId;
